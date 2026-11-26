@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "glyphwerk-gba"
-version = "0.1.0"
+version = "0.1.1"
 description = "Safety-first localization, version-porting, quality-gate, and deterministic QA-bot toolkit for GBA Gen-3 ROM projects."
 readme = "README.md"
 license = {text = "MIT"}
