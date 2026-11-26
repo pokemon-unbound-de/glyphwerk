@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT))
 
 from glyphwerk.codec.pcs import decode, encode  # noqa: E402
 from glyphwerk.codec.width import lint_text  # noqa: E402
+from glyphwerk.demo_data import build_synthetic_rom  # noqa: E402
 from glyphwerk.gates.gfx_pointers import check_gfx_pointers  # noqa: E402
 from glyphwerk.gates.rom_header import check_rom_header_pointers  # noqa: E402
 from glyphwerk.gates.strcpy_safety import check_strcpy_safety  # noqa: E402
@@ -17,7 +18,6 @@ from glyphwerk.porter.dex_wrap import wrap_balanced  # noqa: E402
 from glyphwerk.porter.tables import TableEntry, apply_table_entries  # noqa: E402
 from glyphwerk.rom.pointers import find_all_pointers  # noqa: E402
 from glyphwerk.rom.relocate import PoolAllocator, graphic_lock_ranges, relocate_string  # noqa: E402
-from tests.conftest import build_synthetic_rom  # noqa: E402
 
 
 def main() -> int:
