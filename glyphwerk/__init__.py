@@ -1,6 +1,6 @@
 """Glyphwerk (GBA) — Safety-first localization, porting, gate & QA-bot toolkit."""
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 from glyphwerk.profile import GameProfile, load_profile
 
