@@ -12,6 +12,7 @@ class TermFinding:
     blocked: str
     preferred: str
     context: str
+    start: int = 0
 
 
 def check_terminology(
@@ -25,11 +26,17 @@ def check_terminology(
         preferred = rule.get("preferred", "")
         flags = 0 if rule.get("case_sensitive") else re.IGNORECASE
         pattern = re.compile(rf"(?<!\w){re.escape(blocked)}(?!\w)", flags)
-        m = pattern.search(text)
-        if m:
-            lo = max(0, m.start() - 16)
-            hi = min(len(text), m.end() + 16)
-            findings.append(TermFinding(blocked=blocked, preferred=preferred, context=text[lo:hi]))
+        for match in pattern.finditer(text):
+            lo = max(0, match.start() - 16)
+            hi = min(len(text), match.end() + 16)
+            findings.append(
+                TermFinding(
+                    blocked=blocked,
+                    preferred=preferred,
+                    context=text[lo:hi],
+                    start=match.start(),
+                )
+            )
     return findings
 
 
