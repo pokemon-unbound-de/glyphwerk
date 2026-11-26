@@ -17,7 +17,7 @@
 
 ## Checklist
 
-- [ ] I have read every changed line and can explain it in review
+- [ ] I can answer review questions about this change (maintainers review every line before merging)
 - [ ] No ROMs, saves, savestates, patches or game text/dumps are included (also not as test fixtures)
 - [ ] No game-specific ROM offsets in `glyphwerk/` (they belong in `profiles/`)
 - [ ] One topic per PR

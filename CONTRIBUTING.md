@@ -16,7 +16,7 @@ AI assistants (chat models, coding agents, autocomplete) are welcome here. We bu
 
 1. **Say so in the PR.** Tick the AI box in the pull request template and name the tool, for example "Claude Code wrote the first draft of the tests". You don't need to share prompts.
 2. **Tests stay green.** `ruff`, `pytest`, the demo and `glyphwerk secret-scan .` must pass locally and in CI. A PR that only passes because a test was weakened or skipped will be closed.
-3. **A human stands behind it.** You have read every changed line, you can explain it in review, and you answer follow-up questions yourself. PRs opened by bots without a responsible person will be closed.
+3. **A human stands behind it.** Maintainers review every line before merging. As the author, you answer review questions yourself. PRs opened by bots without a responsible person will be closed.
 4. **No game data, not even via AI.** Don't paste ROM bytes, save files or game text into an AI tool to generate fixtures, and don't commit what it produces from them. Fixtures are built synthetically in the test.
 5. **Keep it small.** One topic per PR. Large AI-generated refactors are hard to review. Open an issue first and agree on the plan.
 
