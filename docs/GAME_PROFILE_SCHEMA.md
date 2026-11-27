@@ -22,5 +22,9 @@ All ROM-specific offsets live in JSON profiles under `profiles/`. Never hardcode
 | `windows` | `object` | No | Named UI box specs: `{"max_line_px": int, "max_lines": int}`. |
 | `buffer_max_px` | `object` | No | Worst-case pixel expansion per buffer ID (`"FD01"`, `"FD06"`, `"default"`). |
 | `wram_bpre` | `object` | No | WRAM/SaveBlock addresses consumed by `glyphwerk/bot/explorer.lua`. |
+| `rom_game_code` | `string` | No | 4-character game code from the ROM header at `0xAC` (e.g. `"BPRE"`). |
+| `display.width_px`, `display.height_px`, `display.frame_rate_hz` | `int`, `int`, `float` | No | Screen size and refresh rate of the console (GBA: 240 × 160 at 59.7275 Hz). |
+
+Machine-specific settings (emulator path, runtime folder, start state, capture size) do not belong in a profile, which is public and describes the game. Pass them as environment variables instead.
 
 See [`profiles/firered_bpre.json`](../profiles/firered_bpre.json) and [`profiles/cfru_template.json`](../profiles/cfru_template.json) for complete examples.

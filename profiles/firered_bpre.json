@@ -5,6 +5,7 @@
   "rom_base_addr": "0x08000000",
   "rom_max_size": 16777216,
   "header_guard_end": "0x00000200",
+  "rom_game_code": "BPRE",
   "strcpy_addr": "0x081E5F88",
   "font_widths_table": "0x001FB100",
   "free_space": {
@@ -27,11 +28,19 @@
     "FD06": 42,
     "default": 60
   },
+  "display": {
+    "width_px": 240,
+    "height_px": 160,
+    "frame_rate_hz": 59.7275
+  },
   "wram_bpre": {
     "save_block_1_ptr": "0x03005008",
     "script_lock_byte": "0x03000F9C",
+    "script_ctx1_status_addr": "0x03000EA8",
+    "script_ctx1_addr": "0x03000EB0",
     "main_cb2_ptr": "0x030030F4",
     "battle_flags_addr": "0x03003529",
+    "string_var1_addr": "0x02021CD0",
     "string_var4_addr": "0x02021D18",
     "base_flags_offset": "0x0EE0",
     "base_flags_size": 288,
