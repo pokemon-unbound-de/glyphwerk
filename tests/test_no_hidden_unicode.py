@@ -20,6 +20,7 @@ FORBIDDEN_EXTRA = {
     0x115F, 0x1160, 0x3164, 0xFFA0,  # Hangul fillers (category Lo, but render as nothing)
     *range(0xFE00, 0xFE0F),  # variation selectors 1-15
     *range(0xE0100, 0xE01F0),  # variation selectors supplement
+    0x180B, 0x180C, 0x180D, 0x180F,  # Mongolian free variation selectors (category Mn)
 }
 EMOJI_VS = 0xFE0F  # allowed only directly after a symbol (emoji presentation)
 
@@ -74,6 +75,7 @@ def test_detector_finds_hidden_characters():
     assert find_hidden("text" + chr(0xFE01)) == [(1, 0xFE01)]
     assert find_hidden("text" + chr(0xE0100)) == [(1, 0xE0100)]
     assert find_hidden("A" + chr(0xFE0F)) == [(1, 0xFE0F)]
+    assert find_hidden("mn" + chr(0x180B) + chr(0x180F)) == [(1, 0x180B), (1, 0x180F)]
 
 
 def test_emoji_presentation_selector_is_allowed():
@@ -91,13 +93,30 @@ def test_files_without_suffix_are_checked():
     assert "LICENSE" in names
 
 
+def scan_file(path: Path) -> list[str]:
+    """Problems in one file. A NUL byte only marks a binary file when the file has no suffix (e.g. a stray
+    binary without extension); in a known text suffix it is itself a problem, so it cannot hide what follows."""
+    data = path.read_bytes()
+    rel = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
+    if b"\0" in data:
+        if path.suffix == "":
+            return []
+        return [f"{rel}: NUL byte in a text file"]
+    text = data.decode("utf-8", errors="replace")
+    return [f"{rel}:{line_no} {describe(line_no, cp)}" for line_no, cp in find_hidden(text)]
+
+
+def test_nul_does_not_hide_text(tmp_path):
+    f = tmp_path / "x.md"
+    f.write_bytes(b"visible\x00" + chr(0x202E).encode("utf-8") + b"hidden")
+    assert scan_file(f) == [f"{f}: NUL byte in a text file"]
+    g = tmp_path / "blob"
+    g.write_bytes(b"\x00\x01\x02")
+    assert scan_file(g) == []
+
+
 def test_repository_has_no_hidden_characters():
     problems = []
     for path in _text_files():
-        data = path.read_bytes()
-        if b"\0" in data:  # binary file
-            continue
-        text = data.decode("utf-8", errors="replace")
-        for line_no, cp in find_hidden(text):
-            problems.append(f"{path.relative_to(ROOT)}:{line_no} {describe(line_no, cp)}")
+        problems += scan_file(path)
     assert not problems, "Invisible or bidi characters found:\n" + "\n".join(problems[:50])
