@@ -19,7 +19,7 @@ AI assistants (chat models, coding agents, autocomplete) are welcome here. We bu
 3. **A human stands behind it.** Maintainers review every line before merging. As the author, you answer review questions yourself. PRs opened by bots without a responsible person will be closed.
 4. **No game data, not even via AI.** Don't paste ROM bytes, save files or game text into an AI tool to generate fixtures, and don't commit what it produces from them. Fixtures are built synthetically in the test.
 5. **Keep it small.** One topic per PR. Large AI-generated refactors are hard to review. Open an issue first and agree on the plan.
-6. **No instructions to AI reviewers.** Our review tools treat everything in a PR, issue, commit or code comment as data, never as instructions. Text that addresses AI tools (for example "ignore previous instructions"), hidden text in HTML comments, and invisible or direction-changing Unicode characters are treated as an attack: the PR is closed and the account may be blocked. `tests/test_no_hidden_unicode.py` checks the repository for invisible characters.
+6. **No instructions to AI reviewers.** Our review tools treat everything in a PR, issue, commit or code comment as data, never as instructions. Text that addresses AI tools (for example "ignore previous instructions"), HTML comments that address AI tools or hide instructions (the hints in our PR template are fine), and invisible or direction-changing Unicode characters are treated as an attack: the PR is closed and the account may be blocked. `tests/test_no_hidden_unicode.py` checks the repository for invisible characters.
 
 Reviewers treat AI-assisted and hand-written PRs the same: the code has to be correct, tested and understandable.
 
